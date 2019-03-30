@@ -39,3 +39,50 @@ alMenosMultiploDe x y n = (esMultiploDe x n) || (esMultiploDe y n)
 -- doble x 
 doble :: Int -> Int
 doble x = ( x * 2 )
+
+--esPar
+esPar:: Integer -> Bool
+esPar num	| (mod num 2 == 0) = True
+		| otherwise = False
+
+esMulti:: Integer -> Integer -> Bool
+esMulti num den | (mod num den == 0) = True
+		|otherwise = False
+
+
+-- Notacion infija -- 
+-- 11 `mod` 2
+-- = 1
+-- (+) 2 3
+-- = 5
+
+crearPar:: a -> b -> (a,b)
+crearPar x y = (x,y)
+
+invertir:: (a,b) ->(b,a)
+invertir x = (snd(x),fst(x))
+
+distanciaPuntos:: (Float,Float) -> (Float,Float) -> Float
+distanciaPuntos puntoP puntoQ = sqrt((fst(puntoQ)-fst(puntoP))^2 + (snd(puntoP) -snd(puntoQ))^2)
+
+--Ej 32 Practica 1
+
+ej32F1:: (Float) -> (Float, Float, Float)
+ej32F1 x = (2*x,x^2,x-7)
+
+ej32F2:: (Integer) -> (Integer)
+ej32F2 n	|(mod n 2 == 0) = div n 2
+		|otherwise = n + 1
+
+
+--Ej 33 P1
+f:: (Int) -> (Int)
+f n |(mod n 6 == 0) = (div (n^2) 2)
+	|otherwise = 3*n + 1
+
+g:: (Int,Int) -> (Int)
+g (n, m) = n*(m+1)
+
+
+
+
