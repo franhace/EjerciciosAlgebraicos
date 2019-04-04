@@ -46,5 +46,26 @@ alMenosUnMultiploDe x y z = (mod x z == 0) || (mod y z == 0)
 
 -- Relaciones
 -- r1 si a y b = paridad
-r1 :: Integer -> Integer -> Bool
-r1 a b = not ( todosImpares a b ) || (todosImpares a b)
+r1 :: Int -> Int -> Bool
+r1 a b = mod a 2 == mod b 2
+
+-- r2 si 2a + 3b div por 5
+r2 :: Int -> Int -> Bool
+r2 a b = mod (a * 2 + b * 3 ) 5 == 0 
+
+-- r3 si digitos de unidades de a, b y a x b son iguales
+r3 :: Int -> Int -> Bool
+r3 a b = unidades a /= unidades b && unidades a /= unidades (a*b)
+
+-- Rel Equivalencia (-inf, 3) U (3, inf)
+rel3 :: Float -> Float -> Bool
+rel3 x y | x < 3 && y < 3 = True
+	 | x > 3 && y > 3 = True
+	 | otherwise = False
+
+-- Rel Equivalencia (-inf, 3) U [3, 7) U [7, inf)
+rel37 :: Float -> Float -> Bool
+rel37 x y | x < 3 && y < 3 = True
+	  | (x == 3 && x < 7) && (y == 3 && y < 7) = True
+	  | x >= 7 && y >= 7 = True
+	  | otherwise = False
