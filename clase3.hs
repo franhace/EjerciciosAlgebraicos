@@ -43,3 +43,8 @@ alMenosDosPares2 x y z = not (alMenosDosImpares x y z)
 -- Determina si dados 3 numeros enteros, algunos de los 2 primeros es multiplo del 3ero
 alMenosUnMultiploDe :: Int -> Int-> Int-> Bool
 alMenosUnMultiploDe x y z = (mod x z == 0) || (mod y z == 0) 
+
+-- Relaciones
+-- r1 si a y b = paridad
+r1 :: Integer -> Integer -> Bool
+r1 a b = not ( todosImpares a b ) || (todosImpares a b)
