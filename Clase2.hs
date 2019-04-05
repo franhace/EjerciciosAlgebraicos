@@ -1,3 +1,7 @@
+module Clase2
+where
+
+
 f n | n /= 0 = 0
     | n == 0 = 1
 
@@ -76,12 +80,12 @@ ej32F2 n	|(mod n 2 == 0) = div n 2
 
 
 --Ej 33 P1
-f:: (Int) -> (Int)
-f n |(mod n 6 == 0) = (div (n^2) 2)
+f2 :: (Int) -> (Int)
+f2 n |(mod n 6 == 0) = (div (n^2) 2)
 	|otherwise = 3*n + 1
 
-g:: (Int,Int) -> (Int)
-g (n, m) = n*(m+1)
+g2 :: (Int,Int) -> (Int)
+g2 (n, m) = n*(m+1)
 
 
 

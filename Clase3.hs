@@ -1,7 +1,14 @@
+-- Reutilizar codigo
+-- module ....
+-- si se especifican las funciones solo se exportan esas
+-- where 
+import Clase2
+
+
 -- Ejercicios de enteros
-signo :: Int -> Int
-signo x | x >= 0 = 1
-        | otherwise = (-1)
+signo2 :: Int -> Int
+signo2 x | x >= 0 = 1
+         | otherwise = (-1)
 
 -- Devuelve las unidades de un entero
 unidades :: Int -> Int
@@ -90,3 +97,68 @@ rela112 ab pq = ((fst ab) * (snd pq)) == ((snd ab) * (fst pq))
 rela113 :: (Float, Float) -> (Float, Float) -> Bool
 rela113 ab pq | (fst pq == 0) || (snd pq == 0) = False
               | otherwise = rela112 ab pq
+
+-- Factorial 
+factorial :: Integer -> Integer
+factorial n | (n == 0) || (n == 1) = 1
+	    | otherwise = n * factorial (n-1)
+
+-- sc 
+sc :: Integer -> Integer 
+sc n | n == 0 = 0
+     | otherwise = sc(n-1) + n ^ 2
+
+-- fibonacci, devuelve el i-esimo termino de la serie
+fib :: Integer -> Integer 
+fib n | n == 0 = 0
+      | n == 1 = 1
+      | otherwise = fib(n-1) + fib (n-2)
+
+
+-- Sucesiones, devuelve el n-esimo termino de la suc
+suc1 :: Integer -> Integer 
+suc1 n | n == 0 = 2
+       | otherwise = 2 * n * suc1 (n - 1) + ((2 ^ (n+1)) * factorial n)
+-- aca fue necesario usar el ^ en vez de **
+
+ 
+suc2 :: Integer -> Integer
+suc2  n | n == 1 = 1
+        | n == 2 = 2
+        | otherwise = n * suc2 ( n-1 ) + 2 * (n+1) * suc2 ( n-2)
+
+suc3 :: Integer -> Integer
+suc3 n | n == 1 = -3
+       | n == 2 = 6
+       | esPar n = suc3 ( n-1 ) + 2 * suc3 (n-2) + 9
+       | otherwise = ((suc3 (n-1)) * (-1)) -3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
