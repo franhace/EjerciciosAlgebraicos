@@ -69,3 +69,24 @@ rel37 x y | x < 3 && y < 3 = True
 	  | (x == 3 && x < 7) && (y == 3 && y < 7) = True
 	  | x >= 7 && y >= 7 = True
 	  | otherwise = False
+
+-- 11. Dados (a, b) y (p, q), determinar el tipo e implementar funciones
+--     que determinen si (a, b) esta relacionado con (p, q) cuando:
+-- 11.1: (a, b) = k*(p, q), con a,b,p,q,k Reales, sin el cero
+--'(a, b) == k*(p, q)' es lo mismo que
+-- 'a == k*p' y 'b == k*q'?
+-- 'a/p == k' y 'b/q == k'?
+-- 'a/p == b/q'?
+rela111 :: (Float, Float) -> (Float, Float) -> Bool
+rela111 ab pq = ((fst ab) / (fst pq)) == ((snd ab) / (snd pq))
+-- 11.2: lo mismo que 11.1, pero con a,b,p,q Enteros, y k Real, sin el cero
+-- '(a, b) == k*(p, q)' es lo mismo que
+-- 'a/p == b/q', pero como son Integers y la division no esta definida,
+-- 'pasamos' multiplicando los denominadores y obtenemos
+-- 'a*q == b*p'
+rela112 :: (Float, Float) -> (Float, Float) -> Bool
+rela112 ab pq = ((fst ab) * (snd pq)) == ((snd ab) * (fst pq))
+--11.3: Opcional: lo mismo que 11.2 pero incluyen el (0,0):
+rela113 :: (Float, Float) -> (Float, Float) -> Bool
+rela113 ab pq | (fst pq == 0) || (snd pq == 0) = False
+              | otherwise = rela112 ab pq
