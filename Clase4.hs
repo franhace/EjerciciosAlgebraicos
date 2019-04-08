@@ -57,3 +57,57 @@ f4 n q  | n == 0 = 1
 f4b :: Int -> Float -> Float
 f4b n q = (f3 n q) - (f2 n q)
 
+-- Funcion par sin usar mod ni div
+
+esPar3 :: Int -> Bool
+esPar3 n | n == 0 = True
+        | n < 2  = False
+        | otherwise = esPar3 (n-2)
+
+esMultiploDe3 :: Int -> Bool
+esMultiploDe3 n | n == 0 = True
+		| n < 3 = False
+		| otherwise = esMultiploDe3 (n-3)
+
+-- Implementar la función sumaImpares :: Integer -> Integer que dado n ∈ N sume los
+--primeros n números impares. Ej: sumaImpares 3 ( 1+3+5 = 9).
+sumaImpares :: Integer -> Integer
+sumaImpares n | n == 0 = 0	      
+	      | otherwise = ( 2 * n -1) + sumaImpares (n-1)
+
+-- Escribir una función doblefact que dado n ∈ N calcula n!! = n (n − 2)(n − 4) · · -- Por ejemplo: doblefact 10 10 ∗ 8 ∗ 6 ∗ 4 ∗ 2 = 3840.
+doblefact :: Integer -> Integer
+doblefact n | n <= 0 = 1
+	    | otherwise = n * doblefact (n-2) 
+
+-- Escribir una función recursiva que no termine si se la ejecuta con enteros negativos (y en cambio sı́ termine para el resto de los enteros)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
