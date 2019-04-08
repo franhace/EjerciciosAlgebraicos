@@ -50,7 +50,7 @@ maximo x y | x > y = x
 maximo3 x y z = max ((max x y)) (z)
 
 esPar n | mod n 2 == 0 = True
-      | otherwise = False
+        | otherwise = False
 esMultiploDe x y | mod y x == 0 = True
                  | otherwise = False
 

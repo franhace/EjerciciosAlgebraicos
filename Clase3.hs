@@ -2,7 +2,10 @@
 -- module ....
 -- si se especifican las funciones solo se exportan esas
 -- where 
-import Clase2
+
+
+module Clase3
+where
 
 
 -- Ejercicios de enteros
@@ -11,8 +14,9 @@ signo2 x | x >= 0 = 1
          | otherwise = (-1)
 
 -- Devuelve las unidades de un entero
+
 unidades :: Int -> Int
-unidades x = (signo x) * (mod (abs x) 10)
+unidades x = (signo2 x) * (mod (abs x) 10)
 
 unidadesbis :: Int -> Int
 unidadesbis x = rem x 10
@@ -100,7 +104,7 @@ rela113 ab pq | (fst pq == 0) || (snd pq == 0) = False
 
 -- Factorial 
 factorial :: Integer -> Integer
-factorial n | (n == 0) || (n == 1) = 1
+factorial n | (n == 0) = 1
 	    | otherwise = n * factorial (n-1)
 
 -- sc 
@@ -127,11 +131,11 @@ suc2  n | n == 1 = 1
         | n == 2 = 2
         | otherwise = n * suc2 ( n-1 ) + 2 * (n+1) * suc2 ( n-2)
 
-suc3 :: Integer -> Integer
-suc3 n | n == 1 = -3
-       | n == 2 = 6
-       | esPar n = suc3 ( n-1 ) + 2 * suc3 (n-2) + 9
-       | otherwise = ((suc3 (n-1)) * (-1)) -3
+-- suc3 :: Integer -> Integer
+-- suc3 n | n == 1 = -3
+--       | n == 2 = 6
+--       | esPar n = suc3 ( n-1 ) + 2 * suc3 (n-2) + 9
+--       | otherwise = ((suc3 (n-1)) * (-1)) -3
 
 
 
