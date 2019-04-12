@@ -81,6 +81,19 @@ rel37 x y | x < 3 && y < 3 = True
 	  | x >= 7 && y >= 7 = True
 	  | otherwise = False
 
+-- 10. sonTuplasMultiplo
+-- 1 k pertenece a Enteros
+--sonTuplasMultiplo :: ( Int, Int ) -> ( Int, Int ) -> Bool
+-- sonTuplasMultiplo ab pq | a /= 0 && b /= 0 = ( div p a == div q b ) && ( mod p a == mod q b)
+--			| a == 0 && b /= 0 = p == 0 && mod q b = 1
+--			| a /= 0 && b == 0 = q == 0 && mod p a = 0
+
+-- 2 k pertenece a Reales, como el k no es parte de la signatura de la funcion, 
+-- mantenemos el int y no ponemos Float
+--sonTuplasMultiplo :: ( Int, Int ) -> ( Int, Int ) -> Bool
+-- sonTuplasMultiplo ab pq = b * p == a * q
+
+
 -- 11. Dados (a, b) y (p, q), determinar el tipo e implementar funciones
 --     que determinen si (a, b) esta relacionado con (p, q) cuando:
 -- 11.1: (a, b) = k*(p, q), con a,b,p,q,k Reales, sin el cero
@@ -104,7 +117,7 @@ rela113 ab pq | (fst pq == 0) || (snd pq == 0) = False
 
 -- Factorial 
 factorial :: Integer -> Integer
-factorial n | (n == 0) = 1
+factorial n | n == 1 = 1
 	    | otherwise = n * factorial (n-1)
 
 -- sc 
