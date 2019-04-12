@@ -42,7 +42,8 @@ f1 n | n == 0 = 1
      | n > 0 = 2 ^ n + f1 (n-1)	
 
 f2 :: Int -> Float -> Float
-f2 n q  | n == 1 = q
+-- para que funque para f3 reemplazar la linea de abajo por 0, sino 1
+f2 n q  | n == 1 = 0
 	| otherwise = q ^ n + f2 (n-1) q
 
 f3 :: Int -> Float -> Float
