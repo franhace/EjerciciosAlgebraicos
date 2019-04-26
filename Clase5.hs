@@ -4,15 +4,42 @@
 
 factorial :: Integer -> Integer
 factorial n | n == 1 = 1
-	    | otherwise = n * factorial (n-1)
+	        | otherwise = n * factorial (n-1)
 
 eAprox :: Integer -> Float 
 eAprox n | n == 0 = 1
 	 	 | otherwise = (1/fromInteger(factorial n)) + eAprox (n-1)
 
---constante :: Float
--- constante e = eAprox 100
--- 0 1 1 2 3 5 8 
+e :: Float
+e = eAprox 100
+
+-- Implementar una función parteEntera :: Float -> Integer que calcule la parte entera
+-- de un número real positivo. 
+parteEnteraPositiva :: Float -> Integer
+parteEnteraPositiva n | n < 1 = 0
+			  		  | otherwise = 1 + parteEnteraPositiva(n-1)
+
+-- -- Cambiar la implementación de parteEntera :: Float -> Integer para que también
+-- -- funcione con números negativos.
+parteEnteraNegativa :: Float -> Integer
+parteEnteraNegativa n | n >= 0 && n < 1  = 0
+                      | n > 0     =  1 + parteEnteraNegativa (n-1)
+                      | otherwise = -1 + parteEnteraNegativa (n+1)
+
+parteEnteraNegativa2 :: Float -> Integer
+parteEnteraNegativa2 n | n >= 0 && n < 1  = 0
+            		   | otherwise = signo(n)*1 + parteEnteraPositiva (n+((-1)*signo(n))) 
+            		   where signo a | a < 0 = (-1)
+            		   				 | otherwise = 1
+
+-- Debe funcionar para a ≥ 0, d > 0 y no se pueden usar div , mod ni / .
+
+division :: Integer -> Integer -> (Integer, Integer)
+division a d | a < d  = (0, a)
+			 -- cr = Conciente Y Resto
+             | otherwise = (1 + fst(cr), snd(cr))  
+			 where cr = division (a-d) d
+
 fibo :: Integer -> Integer
 fibo n | n == 0 = 0
        | n == 1 = 1
