@@ -73,7 +73,7 @@ menorDivisorDesde n k | n-k == 0 = k
 
 menorDivisorDesde2 :: Integer -> Integer -> Integer
 menorDivisorDesde2 n k | mod n k == 0 = k
-                      | otherwise = menorDivisorDesde2 n (k+1)
+                       | otherwise = menorDivisorDesde2 n (k+1)
 
 menorDivisor :: Integer -> Integer
 menorDivisor n | n == 1 = 1
@@ -104,3 +104,4 @@ fiboHasta n | n == 0 = 0
 
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 main = print $ fibs !! 5
+x
