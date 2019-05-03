@@ -28,43 +28,9 @@ sumaGaussiana n = n + sumaGaussiana (n-1)
 algunoEsCero :: (Integer, Integer, Integer) -> Bool
 algunoEsCero (a, b, c) = a*b*c == 0
 
---d
+--f
 productoInterno :: (Float, Float) -> (Float, Float) -> Float
 productoInterno (x1, y1) (x2, y2) = (x1*x2) + (y1*y2) 
-
-
--- Ejercicios (mas recursion)
-
-menorDivisorDesde :: Integer -> Integer -> Integer
-menorDivisorDesde n k | mod n k == 0 = k
-                      | otherwise = menorDivisorDesde n (k+1)
-
-menorDivisor :: Integer -> Integer
-menorDivisor n | n == 1 = 1
-               | otherwise = menorDivisorDesde n 2
-
-esPrimo :: Integer -> Bool
-esPrimo n | n == 1 = False
-          | otherwise = n == (menorDivisor n)
-
-checkPrimos :: Integer -> Integer -> Bool
-checkPrimos n k | n == 1 = False
-                | (esPrimo n) && (esPrimo k) = True
-                | otherwise = checkPrimos (n-1) (k+1)
-
---checkPrimos 1 k = (esPrimo k)
---checkPrimos n k = (esPrimo n) && (esPrimo k)
-
-esSumaDeDosPrimos :: Integer -> Bool
-esSumaDeDosPrimos 1 = False
-esSumaDeDosPrimos n = checkPrimos (n-1) 1
-
--- 2 -- todo numero par > 2 es suma de dos primos
--- checkea si todos los p pares hasta n son suma de dos primos
-pruebaGoldHasta :: Integer -> Bool
-pruebaGoldHasta 3 = False   -- solo por si ingresan un impar o 3
-pruebaGoldHasta 4 = True    -- primer par > 2
-pruebaGoldHasta n = esSumaDeDosPrimos n && pruebaGoldHasta (n-2)
 
 -- 3
 -- suma de digitos version desprolija. 
@@ -107,6 +73,41 @@ todosDigitosIguales n | n < 10 = True
 -- compara la unidad de n con si misma, lo cual siempre es verdadero,
 -- pero no se me ocurrio una forma linda de saltear este primer paso
 
+
+-- Ejercicios (mas recursion)
+
+menorDivisorDesde :: Integer -> Integer -> Integer
+menorDivisorDesde n k | mod n k == 0 = k
+                      | otherwise = menorDivisorDesde n (k+1)
+
+menorDivisor :: Integer -> Integer
+menorDivisor n | n == 1 = 1
+               | otherwise = menorDivisorDesde n 2
+
+esPrimo :: Integer -> Bool
+esPrimo n | n == 1 = False
+          | otherwise = n == (menorDivisor n)
+
+checkPrimos :: Integer -> Integer -> Bool
+checkPrimos n k | n == 1 = False
+                | (esPrimo n) && (esPrimo k) = True
+                | otherwise = checkPrimos (n-1) (k+1)
+
+--checkPrimos 1 k = (esPrimo k)
+--checkPrimos n k = (esPrimo n) && (esPrimo k)
+
+esSumaDeDosPrimos :: Integer -> Bool
+esSumaDeDosPrimos 1 = False
+esSumaDeDosPrimos n = checkPrimos (n-1) 1
+
+-- 2 -- todo numero par > 2 es suma de dos primos
+-- checkea si todos los p pares hasta n son suma de dos primos
+pruebaGoldHasta :: Integer -> Bool
+pruebaGoldHasta 3 = False   -- solo por si ingresan un impar o 3
+pruebaGoldHasta 4 = True    -- primer par > 2
+pruebaGoldHasta n = esSumaDeDosPrimos n && pruebaGoldHasta (n-2)
+
+
 -- 5
 -- sucesion a_[n+1] se define como:
 --     a_[n] / 2     : si a_[n] es par
@@ -137,12 +138,12 @@ contaColl an | an == 1 = 1
 -- y devuelva el de la secuencia más larga (an=1 se reserva para terminar
 -- la secuencia, sino nunca termina)
 
-checkLenColl :: Integer -> Integer -> Integer
+{-checkLenColl :: Integer -> Integer -> Integer
 checkLenColl an max | an == 1 = max
                     | contaColl an > contaColl max = checkLenColl (n-1) an
                     | otherwise = checkLenColl (an-1) max
 
-checkLenCollHasta an = checkLenColl an an
+checkLenCollHasta an = checkLenColl an an-}
 
 -- compara cantidad de terminos de an con cantidad de terminos maxima hasta el
 -- momento (max). Si an tiene mas terminos que el maximo guardad, este an es el
@@ -153,3 +154,5 @@ checkLenCollHasta an = checkLenColl an an
 -- an = 6171 es el valor que mas terminos tiene, con 262 terminos.
 -- puede ser que existan otros valores con 262 terminos, en cuyo caso, son
 -- ignorados por la funcion.
+
+
