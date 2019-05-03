@@ -1,3 +1,6 @@
+-- factorial 0 = 1
+-- factorial ( n + 1) = ( n + 1) * factorial n
+
 -- Pattern Matching + Recursion
 -- 2 a
 yLogico :: Bool -> Bool -> Bool
@@ -43,7 +46,11 @@ sumaDigitos :: Integer -> Integer
 sumaDigitos n | n < 10 = n
               | otherwise = auxSuma n 10
 
--- limpiando el codigo
+-- Usando pattern matching no se puede definir condiciones
+-- sumaDigitosbis :: Integer -> Integer
+-- sumaDigitosbis n < 10 = n
+-- sumaDigitosbis _ = auxSuma n 10
+
 -- suma de digitos de n
 sumaDigitos2 :: Integer -> Integer
 sumaDigitos2 n | n < 10 = n
@@ -89,8 +96,8 @@ esPrimo n | n == 1 = False
           | otherwise = n == (menorDivisor n)
 
 checkPrimos :: Integer -> Integer -> Bool
-checkPrimos n k | n == 1 = False
-                | (esPrimo n) && (esPrimo k) = True
+checkPrimos 1 _ = False
+checkPrimos n k | (esPrimo n) && (esPrimo k) = True
                 | otherwise = checkPrimos (n-1) (k+1)
 
 --checkPrimos 1 k = (esPrimo k)
@@ -121,38 +128,29 @@ pruebaGoldHasta n = esSumaDeDosPrimos n && pruebaGoldHasta (n-2)
 -- no estoy seguro que el ejercicio pida
 
 -- Primero la conjetura a secas que siempre devuelve un 1
-conjeturaDeCollatz :: Integer -> Integer
-conjeturaDeCollatz an | an == 1 = 1
-                      | anEsPar   = conjeturaDeCollatz (div an 2)
-                      | otherwise = conjeturaDeCollatz (3*an + 1)
-                      where anEsPar = mod an 2 == 0
+conjeturaLC :: Integer -> Integer
+conjeturaLC an | an == 1 = 1
+               | anEsPar   = conjeturaLC (div an 2)
+               | otherwise = conjeturaLC (3*an + 1)
+                where anEsPar = mod an 2 == 0
 
 -- ahora implemento el contador de terminos, que suma 1 en cada llamado recursivo
-contaColl :: Integer -> Integer
-contaColl an | an == 1 = 1
-             | anEsPar   = 1 + contaColl (div an 2)
-             | otherwise = 1 + contaColl (3*an + 1)
-             where anEsPar = mod an 2 == 0
+cuentaLC :: Integer -> Integer
+cuentaLC an | an == 1 = 1
+            | anEsPar   = 1 + cuentaLC (div an 2)
+            | otherwise = 1 + cuentaLC (3*an + 1)
+              where anEsPar = mod an 2 == 0
 
 -- y ahora hago una funcion que pruebe todos los valores desde an = 10.000 hasta 2
 -- y devuelva el de la secuencia más larga (an=1 se reserva para terminar
 -- la secuencia, sino nunca termina)
 
-{-checkLenColl :: Integer -> Integer -> Integer
-checkLenColl an max | an == 1 = max
-                    | contaColl an > contaColl max = checkLenColl (n-1) an
-                    | otherwise = checkLenColl (an-1) max
+cualMaxLenLC :: Integer -> Integer -> Integer
+cualMaxLenLC an max | an == 1 = max
+                    | cuentaLC an > cuentaLC max = cualMaxLenLC (an-1) an
+                    | otherwise = cualMaxLenLC (an-1) max
 
-checkLenCollHasta an = checkLenColl an an-}
+-- cualLenLCHasta an = cualLenLC an an
 
--- compara cantidad de terminos de an con cantidad de terminos maxima hasta el
--- momento (max). Si an tiene mas terminos que el maximo guardad, este an es el
--- nuevo maximo, y se hace una llamada recursiva para an-1 y el maximo.
--- finalmente devuelvo el maximo obtenido a traves de todos los llamados
--- recursivos.
-
--- an = 6171 es el valor que mas terminos tiene, con 262 terminos.
--- puede ser que existan otros valores con 262 terminos, en cuyo caso, son
--- ignorados por la funcion.
 
 
