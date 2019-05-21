@@ -103,6 +103,12 @@ checkPrimos n k | (esPrimo n) && (esPrimo k) = True
 --checkPrimos 1 k = (esPrimo k)
 --checkPrimos n k = (esPrimo n) && (esPrimo k)
 
+esSumaDeDosPrimosDesde :: Integer -> Integer -> Bool
+esSumaDeDosPrimosDesde  | p > (n-p ) = False
+						| esPrimo p && esPrimo (n-p) = True
+						| otherwise = esSumaDeDosPrimosDesde n (p+1)
+
+
 esSumaDeDosPrimos :: Integer -> Bool
 esSumaDeDosPrimos 1 = False
 esSumaDeDosPrimos n = checkPrimos (n-1) 1
@@ -114,18 +120,6 @@ pruebaGoldHasta 3 = False   -- solo por si ingresan un impar o 3
 pruebaGoldHasta 4 = True    -- primer par > 2
 pruebaGoldHasta n = esSumaDeDosPrimos n && pruebaGoldHasta (n-2)
 
-
--- 5
--- sucesion a_[n+1] se define como:
---     a_[n] / 2     : si a_[n] es par
---     3*a_[n] + 1   : si a_[n] es impar
-
--- si a_1 = 13, obtengo:
--- 13 -> 40 -> 20 -> 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1
--- 10 terminos
-
--- voy a hacer un contador de terminos a partir de un a_n, aunque
--- no estoy seguro que el ejercicio pida
 
 -- Primero la conjetura a secas que siempre devuelve un 1
 conjeturaLC :: Integer -> Integer
