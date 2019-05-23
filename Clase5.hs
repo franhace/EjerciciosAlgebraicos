@@ -17,7 +17,7 @@ e = eAprox 100
 -- de un número real positivo.
 parteEnteraPositiva :: Float -> Integer
 parteEnteraPositiva n | n < 1 = 0
-                                          | otherwise = 1 + parteEnteraPositiva(n-1)
+                      | otherwise = 1 + parteEnteraPositiva(n-1)
 
 -- -- Cambiar la implementación de parteEntera :: Float -> Integer para que también
 -- -- funcione con números negativos.
@@ -53,6 +53,8 @@ division2 a d | signo a == 1 = division a d
                                 crn = division ((-a)-d) d
 
 -- Implementar una función sumaDivisoresHasta :: Integer -> Integer -> Integer.
+
+--Primero hacemos una fx que devuelve la suma de los divisores de un número hasta cierto punto.
 sumDivHasta :: Integer -> Integer -> Integer
 sumDivHasta n k | k == 1 = 1
                 | mod n k == 0 = k + recur 
@@ -100,8 +102,8 @@ fibo n  | n == 0 = 0
 -- 2 -> 0 1 1
 fiboHasta :: Integer -> Integer
 fiboHasta n | n == 0 = 0
-                        | otherwise = fibo n + fibo (n-1)
+            | otherwise = fibo n + fibo (n-1)
 
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 main = print $ fibs !! 5
-x
+
