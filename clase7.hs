@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 -- Listas
 -- Tienen que ser con elementos del mismo tipo
-=======
-
->>>>>>> a82e4b5e205bcd8c43077405957d0348b66b2434
 
 listita = [2, 3, 4, 5, 3, 2, 9, 12]
 
@@ -188,4 +184,4 @@ ordenados (x:xs) | x > head(xs) = False
 ordenarAux :: Integer -> [Integer] -> [Integer]
 ordenarAux n [] = [n]
 ordenarAux n (x:xs) | n <= x = n:ordenarAux x xs
-		    | otherwise = x:ordenarAux n xs
+					| otherwise = x:ordenarAux n xs
