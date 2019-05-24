@@ -14,6 +14,14 @@ minimo (a,b,c) | decenas a < decenas b && decenas a < decenas c = a
 -- Ej 2
 sucesion :: Integer -> Integer
 sucesion 1 = 1
-sucesion n = 1 + n*(sucesion(n-1)) - (n-1)*(n-1)
+sucesion n = 1 + n*(sucesion(n-1)) 
 
 -- Ej 3
+isInt x = x == fromInteger (round x)
+--esCuadrado :: Integer -> Bool
+--esCuadrado n | (sqrt n) * 10  == isInt n = True
+--	     | otherwise = False
+	     
+
+-- esSumaDeCuadrados :: Integer -> Bool
+
