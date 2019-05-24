@@ -20,6 +20,10 @@ sumaFibonacci :: Integer->Integer
 sumaFibonacci 0 = 0
 sumaFibonacci 1 = 1
 sumaFibonacci n = sumaFibonacci(n-1) + sumaFibonacci (n-2)
+
+sumaFibo :: Integer -> Integer
+sumaFibo 0 = 1
+sumaFibo n = sumaFibo (n) + sumaFibo (n-1)
 --
 
 -- Ejercicio 3
@@ -49,9 +53,9 @@ gap2 a b = masGrande - masChico
 
 maximaDistancia :: [Integer] -> Integer
 maximaDistancia [] = 0
-maximaDistancia [x] = x
+maximaDistancia [x] = 0
 maximaDistancia [x,j] = gap2 x j
-maximaDistancia (x:j:xs) | gap2 x j >= gap2 j (head xs) = (maximaDistancia (x:xs))
+maximaDistancia (x:j:xs) | gap2 x j >= gap2 j (head xs) = maximaDistancia (x:xs)
                          | otherwise = maximaDistancia (j:xs)
 
 -- Ejercicio 5
@@ -66,5 +70,5 @@ cantidadDeApariciones :: Integer -> [Integer] -> Int
 cantidadDeApariciones _ [] = 0
 cantidadDeApariciones n (x:xs) = length (apariciones n (x:xs))
 
-comprimir :: [Integer] -> [(Integer,Integer)]
+-- comprimir :: [Integer] -> [(Integer,Integer)]
 
