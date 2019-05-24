@@ -56,7 +56,7 @@ maximaDistancia [] = 0
 maximaDistancia [x] = 0
 maximaDistancia [x,j] = gap2 x j
 maximaDistancia (x:j:xs) | gap2 x j >= gap2 j (head xs) = maximaDistancia (x:xs)
-                         | otherwise = maximaDistancia (j:xs)
+                         | otherwise = maximaDistancia (j:xs) 
 
 -- Ejercicio 5
 -- Dada una lista devuelve la cantidad de repeticiones de los numeros que aparecen
@@ -70,5 +70,17 @@ cantidadDeApariciones :: Integer -> [Integer] -> Int
 cantidadDeApariciones _ [] = 0
 cantidadDeApariciones n (x:xs) = length (apariciones n (x:xs))
 
--- comprimir :: [Integer] -> [(Integer,Integer)]
+
+-- 
+comprimirAux :: [(Integer, Integer)] -> [(Integer, Integer)]
+comprimirAux []= []
+comprimirAux ((x,y)(a,b):xs) | x == a = comprimirAux ((x,y+b):xs)
+                             | otherwise = (x,y):comprimirAux((a,b):xs)
+
+tuplar :: [Integer] -> [(Integer)]
+tuplar [] = []
+tuplar (x:xs) =(x,1) : tuplar xs
+
+comprimir :: [Integer] -> [(Integer,Integer)]
+comprimir xs = comprimirAux(tuplar xs)
 
