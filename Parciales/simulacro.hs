@@ -57,6 +57,14 @@ maximaDistancia [x] = 0
 maximaDistancia [x,j] = gap2 x j
 maximaDistancia (x:j:xs) | gap2 x j >= gap2 j (head xs) = maximaDistancia (x:xs)
                          | otherwise = maximaDistancia (j:xs) 
+                         
+                         
+maximaDistancia2 :: [Integer] -> Integer
+maximaDistancia2 [a,b] = abs (a - b)
+maximaDistancia2 (x1:x2:xs)
+  | dist > maximaDistancia2 (x2:xs) = dist
+  | otherwise = maximaDistancia2 (x2:xs)
+    where dist = abs (x1 - x2)
 
 -- Ejercicio 5
 -- Dada una lista devuelve la cantidad de repeticiones de los numeros que aparecen
