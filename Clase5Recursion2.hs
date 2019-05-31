@@ -94,6 +94,27 @@ dobleSuma n m i j | i == 1 = 1
 		  | otherwise = i^j + dobleSuma n m i (j-1)
 
 
+sumatoriaPotenciasA :: Integer-> Integer->Integer->Integer
+sumatoriaPotenciasA q 0 m= 0 
+sumatoriaPotenciasA q n m = (potencia q (n+m)) + (sumatoriaPotenciasA q (n-1) m)
+
+
+sumatoriaPotencias :: Integer-> Integer->Integer->Integer
+sumatoriaPotencias q n 0= 0
+sumatoriaPotencias q n m= (sumatoriaPotencias q n (m-1)) + (sumatoriaPotenciasA q n m)
+
+
+sumaRacionalesA :: Float-> Float-> Float
+sumaRacionalesA p 0 =0 
+sumaRacionalesA p q= p/q + (sumaRacionalesA p (q-1))
+
+sumaRacionales :: Float->Float->Float
+sumaRacionales 0 q = 0
+sumaRacionales p q = (sumaRacionales (p-1) q) + (sumaRacionalesA p q )
+
+
+
+
 --Locuras con Fibo
 fibo :: Integer -> Integer
 fibo n  | n == 0 = 0

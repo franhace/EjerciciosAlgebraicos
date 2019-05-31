@@ -85,7 +85,7 @@ comprimirAux []= []
 comprimirAux ((x,y)(a,b):xs) | x == a = comprimirAux ((x,y+b):xs)
                              | otherwise = (x,y):comprimirAux((a,b):xs)
 
-tuplar :: [Integer] -> [(Integer)]
+tuplar :: [Integer] -> [(Integer,Integer)]
 tuplar [] = []
 tuplar (x:xs) =(x,1) : tuplar xs
 

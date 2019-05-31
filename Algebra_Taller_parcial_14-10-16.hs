@@ -20,10 +20,17 @@ dominaAux xs ys | (head xs) > (head ys) = True
 -- dada una lista de al menos 3 elementos, devuelve True si los 2 anteriores son iguales
 -- a la suma del 3ero
 esTipoAux :: [Integer] -> Bool
-esTipoAux xs | head xs + head (tail xs) != head (tail(tail xs)) = False
+esTipoAux [] = True
+esTipoAux [x] = True
+esTipoAux [x,y] = False
+esTipoAux xs | head xs + head (tail xs) /= head (tail(tail xs)) = False
              | head xs + head (tail xs) == head (tail(tail xs)) = True
 
 esTipoFibonacci :: [Integer] -> Bool
-esTipoFibonacci xs | length xs == 3 = esTipoAux xs
-                   | length xs > 3 && (head xs + head (tail xs) != head(tail(tail xs))) = False
-                   | length xs > 3 && (head xs + head (tail xs) != head(tail(tail xs))) = esTipoFibonacci (tail xs)
+esTipoFibonacci [] = esTipoAux []
+esTipoFibonacci xs | length xs > 3 && head xs + head (tail xs) /= head(tail(tail xs)) = False
+                   | length xs > 3 && head xs + head (tail xs) /= head(tail(tail xs)) = esTipoFibonacci (tail xs)
+                   | otherwise = esTipoAux xs
+
+
+-- Ej 4

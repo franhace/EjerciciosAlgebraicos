@@ -153,7 +153,7 @@ hayRepetidos [] = False
 hayRepetidos (x:xs) | length (apariciones x xs) > 0 = True
 					| otherwise = hayRepetidos xs
 
-lis = [2, 3, 3, 4, 4, 5, 5]
+lis = [2, 3, 3, 4, 4, 5, 5,1]
 
 -- que deja en la lista una única aparición
 --de cada elemento, eliminando las repeticiones adicionales.
@@ -171,7 +171,14 @@ maxAux n (x:xs) | n >= x = maxAux n xs
 
 maximo :: [Integer] -> Integer
 maximo [x] = x
-maximo (x:xs) = maximo xs
+maximo (x:xs) = maxAux x xs
+
+
+maximo2 :: [Integer] -> Integer
+maximo2 [x] = x
+maximo2 (x:xs)
+    | x > maximo2 xs = x
+    | otherwise = maximo xs
 
 --Ordena los elementos de forma creciente.
 
@@ -185,3 +192,8 @@ ordenarAux :: Integer -> [Integer] -> [Integer]
 ordenarAux n [] = [n]
 ordenarAux n (x:xs) | n <= x = n:ordenarAux x xs
 					| otherwise = x:ordenarAux n xs
+
+-- reversa una lista
+reversar :: [Integer] -> [Integer]
+reversar [] = []
+reversar (x:xs) = reversar xs ++ [x]
