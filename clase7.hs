@@ -165,23 +165,28 @@ eliminarRepetidos (x:xs) | hayRepetidos (x:xs) == False = (x:xs)
 
 --Calcula el máximo elemento de una lista no vacı́a.
 maxAux :: Integer -> [Integer] -> Integer
-maxAux n [] = n
-maxAux n (x:xs) | n >= x = maxAux n xs
-				| otherwise = maxAux n xs 
+maxAux m [] = m
+maxAux m (x:xs) | m >= x = maxAux m xs
+                | otherwise = maxAux x xs
 
 maximo :: [Integer] -> Integer
 maximo [x] = x
 maximo (x:xs) = maxAux x xs
 
 
-maximo2 :: [Integer] -> Integer
-maximo2 [x] = x
-maximo2 (x:xs)
-    | x > maximo2 xs = x
-    | otherwise = maximo xs
+-- Calcula el minimo elemento de una lista
+minAux :: Integer -> [Integer] -> Integer
+minAux m [] = m
+minAux m (x:xs) | m <= x = minAux m xs
+                | otherwise = minAux x xs
+
+minimo :: [Integer] -> Integer
+minimo [x] = x
+minimo (x:xs) = minAux x xs
 
 --Ordena los elementos de forma creciente.
 
+-- Estan ordenados?
 ordenados :: [Integer] -> Bool
 ordenados [x] = True
 ordenados (x:xs) | x > head(xs) = False
@@ -192,6 +197,14 @@ ordenarAux :: Integer -> [Integer] -> [Integer]
 ordenarAux n [] = [n]
 ordenarAux n (x:xs) | n <= x = n:ordenarAux x xs
 					| otherwise = x:ordenarAux n xs
+
+-- hace pasadas de ordenarAux ordenando la lista desde atras hacia adelante
+-- de mayor a menor hasta que la lista este ordenada
+
+ordenar :: [Integer] -> [Integer]
+ordenar [x] = [x]
+ordenar (x:xs) | ordenados (x:xs) == True = (x:xs)
+               | otherwise = ordenar (ordenarAux x xs)
 
 -- reversa una lista
 reversar :: [Integer] -> [Integer]
