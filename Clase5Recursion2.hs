@@ -4,7 +4,7 @@
 
 factorial :: Integer -> Integer
 factorial n | n == 1 = 1
-                | otherwise = n * factorial (n-1)
+            | otherwise = n * factorial (n-1)
 
 eAprox :: Integer -> Float
 eAprox n | n == 0 = 1
