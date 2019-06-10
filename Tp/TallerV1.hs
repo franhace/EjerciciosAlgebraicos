@@ -91,6 +91,7 @@ amigosDe :: RedSocial -> Usuario -> Set Usuario
 amigosDe (_,[],_) _ = error "no hay relaciones"
 amigosDe (us,rs,ps) x = usuarioComplementario rs x
 
+-- Fx Aux
 -- Me devuelve la(s) tupla(s) complementaria de un Usuario x
 usuarioComplementario :: [((Integer, String), (Integer, String))] -> (Integer, String) -> [(Integer, String)]
 usuarioComplementario [] _ = []
@@ -103,11 +104,8 @@ usuarioComplementario rs x
 ---- Dada una red social y un usuario retorna la cantidad de amigos de dicho usuario
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
 cantidadDeAmigos (us,rs,ps) u = length (amigosDe (us,rs,ps) u )
---
----- Dada una red social retorna el usuario con mas amigos. De existir más de uno devuelve cualquiera de ellos.
---usuarioConMasAmigos :: RedSocial -> Usuario
---usuarioConMasAmigos = undefined
 
+-- Extra
 -- Dada una red social retorna un conjunto con id de todos los usuarios.
 idsDeUsuarios :: RedSocial -> Set Integer
 idsDeUsuarios ([],_,_) = error "no hay users"
@@ -115,6 +113,11 @@ idsDeUsuarios (xs,rs,ps)
     | length xs == 1 = [idDeUsuario (head xs)]
     | otherwise = (idDeUsuario (head xs)) : (idsDeUsuarios (tail xs,rs,ps))
 
+---- Dada una red social retorna el usuario con mas amigos. De existir más de uno devuelve cualquiera de ellos.
+usuarioConMasAmigos :: RedSocial -> Usuario
+usuarioConMasAmigos (us,rs,ps) = usuarioPorId (us,rs,ps) (fst (head (masPopular (zipUsuariosNumAmigos (us,rs,ps)))))
+
+-- Fx Aux
 -- Forma una tupla con (idDeUsuario, Nº amigos)
 zipUsuariosNumAmigos :: RedSocial -> [(Integer,Int)]
 zipUsuariosNumAmigos ([],_,_) = error "no hay users"
@@ -122,16 +125,25 @@ zipUsuariosNumAmigos (us,rs,ps)
     | length us == 1 = [((idDeUsuario(head (listaDeUsuarios))), (cantidadDeAmigos (us,rs,ps) (head (listaDeUsuarios))))]
     | otherwise = [((idDeUsuario(head (listaDeUsuarios))), (cantidadDeAmigos (us,rs,ps) (head (listaDeUsuarios))))] ++ zipUsuariosNumAmigos ((tail us),rs,ps)
     where listaDeUsuarios = usuarios (us,rs,ps)
---    | length xs == 1 = cantidadDeAmigos (xs,rs,ps) (head (idDeUsuarios (xs,rs,ps)))
---    | otherwise = cantidadDeAmigos (xs,rs,ps) (head idDeUsuarios (xs,rs,ps)) : zipUsuariosNumAmigos (xs,rs,ps) (tail x)
---
+
 -- Se queda con tupla (Id de usuario , nº de amigos ) cuyo nº amigos sea mayor al resto
 masPopular :: [(Integer,Int)] -> [(Integer,Int)]
-masPopular
---
+masPopular [x] = [x]
+masPopular ((a,b):(c,d):xs)
+  | (b > d) || (b==d) = masPopular ((a,b):xs)
+  | otherwise = masPopular ((c,d):xs)
+
+-- Funcion que a partir de una id nos devuelve el usuario
+usuarioPorId :: RedSocial -> Integer -> Usuario
+usuarioPorId ([],_,_) _ = error "no hay users"
+usuarioPorId (us,rs,ps) ide
+    | ide == idDeUsuario (head us) = head us
+    | otherwise = usuarioPorId ((tail us),rs,ps) ide
+
+
 ---- Dada una red social retorna True si algún usuario tiene más de un millón de amigos
---estaRobertoCarlos :: RedSocial -> Bool
---estaRobertoCarlos = undefined
+estaRobertoCarlos :: RedSocial -> Bool
+estaRobertoCarlos (us,rs,ps) = snd (head(masPopular (zipUsuariosNumAmigos (us,rs,ps)))) > 10^6
 --
 ---- Dada una red social y un usuario retorna el conjunto de publicaciones del mismo.
 --publicacionesDe :: RedSocial -> Usuario -> Set Publicacion
