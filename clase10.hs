@@ -53,3 +53,38 @@ numerador = (1, sqrt 3) :: Complejo
 denominador = (1, -1) :: Complejo
 
 a = (-1, sqrt 3) :: Complejo
+
+----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

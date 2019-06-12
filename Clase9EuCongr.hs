@@ -79,3 +79,4 @@ solucionParticular :: Integer -> Integer -> Integer -> Integer
 solucionParticular a b m | tieneSolucion a b m = s * div b g
                          | otherwise = 0
                          where (g,s,t) = emcd a m
+                         
