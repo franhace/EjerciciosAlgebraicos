@@ -92,11 +92,11 @@ productoAux ps ss
 type Complejo = (Float, Float)
 
 sumaComplejos :: Complejo -> Complejo -> Complejo
-suma (a,bi) (c,di) = (a+c, bi+di)
+sumaComplejos (a,bi) (c,di) = (a+c, bi+di)
 
 -- producto (a,ai) (b,bi) = (a*c + a*di + bi*c + bi*di)
 productoComplejos :: Complejo -> Complejo -> Complejo
-producto (a,bi) (c,di) = (a*c - b*d, a*di + bi*c)
+productoComplejos (a,bi) (c,di) = (a*c - b*d, a*di + bi*c)
                        where b = bi
                              d = di
 
