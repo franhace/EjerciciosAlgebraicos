@@ -68,6 +68,7 @@ usuarioConMasAmigos (a:b:us, rs, ps)
 -- Dada una red social retorna True si algún usuario tiene más de un millón de amigos
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos (us, rs, ps) = cantidadDeAmigos (us, rs, ps) (usuarioConMasAmigos (us, rs, ps)) >= 1000000
+-- corregir que tenia que ser mayor a 1 millon
 
 -- Dada una red social y un usuario retorna el conjunto de publicaciones del mismo.
 publicacionesDe :: RedSocial -> Usuario -> Set Publicacion
@@ -89,6 +90,8 @@ lesGustanLasMismasPublicaciones (_, _, []) _ _ = True
 lesGustanLasMismasPublicaciones (us, rs, p:ps) a b
     | (pusoLike a p && not (pusoLike b p)) || (not (pusoLike a p) && pusoLike b p) = False
     | otherwise = lesGustanLasMismasPublicaciones (us, rs, ps) a b
+-- se podia hacer con la funcion anterior y la funcion al final que se llama incluido
+-- teoria de conjuntos: si A esta contenido en B y B en A -> A=B
 
 -- Dada una red social y un usuario u, indica si existe un usuario que le puso like a todas las publicaciones de u.
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
@@ -97,6 +100,8 @@ tieneUnSeguidorFiel (u:us, rs, ps) a
     | length (publicacionesDe (u:us, rs, ps) a) == 0 = False
     | likeoTodas u (publicacionesDe (u:us, rs, ps) a) = True
     | otherwise = tieneUnSeguidorFiel (us, rs, ps) a
+-- Falla en que un usuario puede ser seguidor fiel de si mismo
+-- Estaba en aclaraciones
 
 -- Dada una red social y dos usuarios, indica si existe una secuencia de usuarios relacionados para llegar del primero al segundo.
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
