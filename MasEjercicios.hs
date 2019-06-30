@@ -98,3 +98,8 @@ goodDeleteN _ []     = []
 goodDeleteN i (a:as)
   | i == 1    = as
   | otherwise = a : goodDeleteN (i-1) as
+
+-- Dados un conjunto a de usuarios y un conjunto b de usuarios, indica si el conjunto a esta contenido en el conjunto b.
+incluido :: Set Usuario -> Set Usuario -> Bool
+incluido [] _ = True
+incluido (a:as) bs = perteneceUsuario a bs && incluido as bs
