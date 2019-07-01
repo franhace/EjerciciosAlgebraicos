@@ -80,15 +80,52 @@ cantidadDeApariciones n (x:xs) = length (apariciones n (x:xs))
 
 
 -- 
-comprimirAux :: [(Integer, Integer)] -> [(Integer, Integer)]
-comprimirAux []= []
-comprimirAux ((x,y)(a,b):xs) | x == a = comprimirAux ((x,y+b):xs)
-                             | otherwise = (x,y):comprimirAux((a,b):xs)
+--comprimirAux :: [(Integer, Integer)] -> [(Integer, Integer)]
+--comprimirAux []= []
+--comprimirAux ((x,y)(a,b):xs) | x == a = comprimirAux ((x,y+b):xs)
+--                             | otherwise = (x,y):comprimirAux((a,b):xs)
 
 tuplar :: [Integer] -> [(Integer,Integer)]
 tuplar [] = []
-tuplar (x:xs) =(x,1) : tuplar xs
+tuplar (x:xs) = (x,1) : tuplar xs
 
-comprimir :: [Integer] -> [(Integer,Integer)]
-comprimir xs = comprimirAux(tuplar xs)
+--comprimir :: [Integer] -> [(Integer,Integer)]
+--comprimir xs = comprimirAux(tuplar xs)
+
+l1 = [2,2,2,2,2,3]
+l2 = [2,3,4,5,6,7,2,3,4,5]
+l3 = [2,3,4,5]
+
+todosIguales :: [Integer] -> Bool
+todosIguales [] = True
+todosIguales [x] = True
+todosIguales (x:xs)
+    | x == head xs = todosIguales xs
+    | otherwise = False
+
+todosDistintosAux :: Integer -> [Integer] -> Integer
+todosDistintosAux _ [] = 0
+todosDistintosAux n [x] | n == x = 1
+todosDistintosAux n xs
+    | n == head xs = 1 + todosDistintosAux n (tail xs)
+    | otherwise = todosDistintosAux n (tail xs)
+
+todosDistintos :: [Integer] -> Bool
+todosDistintos [] = True
+todosDistintos [x] = True
+todosDistintos xs
+    | todosDistintosAux (head xs) xs > 1 = False
+    | otherwise = todosDistintos (tail xs)
+
+quitar :: Integer -> [Integer] -> [Integer]
+quitar _ [] = []
+quitar n [x] | n == x = []
+quitar n xs
+    | n /= (head xs) = head xs : quitar n (tail xs)
+    | otherwise = quitar n (tail xs)
+
+sacarTodas :: [Integer] -> [Integer] -> [Integer]
+sacarTodas xs [] = xs
+sacarTodas [] _ = []
+sacarTodas xs ys = sacarTodas (quitar (head ys) xs) (tail ys)
 
