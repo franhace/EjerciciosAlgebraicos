@@ -129,3 +129,18 @@ sacarTodas xs [] = xs
 sacarTodas [] _ = []
 sacarTodas xs ys = sacarTodas (quitar (head ys) xs) (tail ys)
 
+promedio :: [Float] -> Float
+promedio [] = 0
+promedio [x] = x
+promedio xs = sum xs / fromIntegral (length xs)
+
+notas :: Integer -> [(Integer, Float)] -> [Float]
+notas _ [] = []
+notas n [x] | n == fst x = [snd x]
+notas n xs
+    | n == fst (head xs) = [snd (head xs)] ++ notas n (tail xs)
+    | otherwise = notas n (tail xs)
+
+promedioDe :: [(Integer,Float)] -> Integer -> Float
+promedioDe [] _ = 0
+promedioDe xs n = promedio (notas n xs)
