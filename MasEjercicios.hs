@@ -29,12 +29,39 @@ reversar [x,j] = [j,x]
 reversar (xs) = (elUltimo xs:(reversar (init xs)))
 
 -- es palindromo?
+-- idem capicua
 palindromo :: [Integer] -> Bool
 palindromo [] = True
 palindromo [x] = True
 palindromo [x,j] = x == j
 palindromo xs | (head xs) /= (elUltimo xs) = False
               | otherwise = palindromo (init(tail xs))
+
+-- busca ultimo digito de un numero
+ultimoDigito :: Integer -> Integer
+ultimoDigito num
+    | (num < 0) = ((-1) * num) `rem` 10
+    | otherwise = num `rem` 10
+
+-- borra el ultimo digito de un numero
+dropLastDigit :: Integer -> Integer
+dropLastDigit n = div n 10
+
+-- calcula cantidad digitos de un numero
+cantDigitos :: Integer -> Integer
+cantDigitos n
+    | n < 10 = 1
+    | otherwise = 1 + cantDigitos (div n 10)
+
+-- devuelve los digitos de un integer, separados en una lista
+digs :: Integral x => x -> [x]
+digs 0 = []
+digs x = digs (x `div` 10) ++ [x `mod` 10]
+
+-- los devuelve en el orden inverso
+digs :: Integral x => x -> [x]
+digs 0 = []
+digs x = x `mod` 10 : digs (x `div` 10)
 
 -- elimina consecutivos duplicados
 cd :: [Integer] -> [Integer]

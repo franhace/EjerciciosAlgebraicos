@@ -92,80 +92,18 @@ tuplar (x:xs) = (x,1) : tuplar xs
 --comprimir :: [Integer] -> [(Integer,Integer)]
 --comprimir xs = comprimirAux(tuplar xs)
 
---
+-- EsCAPICUA
 
-l1 = [2,2,2,2,2,3]
-l2 = [2,3,4,5,6,7,2,3,4,5]
-l3 = [2,3,4,5]
+-- devuelve los digitos de un integer, separados en una lista
+digs :: Integral x => x -> [x]
+digs 0 = []
+digs x = digs (x `div` 10) ++ [x `mod` 10]
 
-todosIguales :: [Integer] -> Bool
-todosIguales [] = True
-todosIguales [x] = True
-todosIguales (x:xs)
-    | x == head xs = todosIguales xs
-    | otherwise = False
+esCapicuaAux :: [Integer] -> Bool
+esCapicuaAux (xs)
+    | length xs <= 1 = True
+    | head xs /= last xs = False
+    | otherwise = esCapicuaAux (init (tail xs))
 
-todosDistintosAux :: Integer -> [Integer] -> Integer
-todosDistintosAux _ [] = 0
-todosDistintosAux n [x] | n == x = 1
-todosDistintosAux n xs
-    | n == head xs = 1 + todosDistintosAux n (tail xs)
-    | otherwise = todosDistintosAux n (tail xs)
-
-todosDistintos :: [Integer] -> Bool
-todosDistintos [] = True
-todosDistintos [x] = True
-todosDistintos xs
-    | todosDistintosAux (head xs) xs > 1 = False
-    | otherwise = todosDistintos (tail xs)
-
-quitar :: Integer -> [Integer] -> [Integer]
-quitar _ [] = []
-quitar n [x] | n == x = []
-quitar n xs
-    | n /= (head xs) = head xs : quitar n (tail xs)
-    | otherwise = quitar n (tail xs)
-
-sacarTodas :: [Integer] -> [Integer] -> [Integer]
-sacarTodas xs [] = xs
-sacarTodas [] _ = []
-sacarTodas xs ys = sacarTodas (quitar (head ys) xs) (tail ys)
-
---
-
-promedio :: [Float] -> Float
-promedio [] = 0
-promedio [x] = x
-promedio xs = sum xs / fromIntegral (length xs)
-
-notas :: Integer -> [(Integer, Float)] -> [Float]
-notas _ [] = []
-notas n [x] | n == fst x = [snd x]
-notas n xs
-    | n == fst (head xs) = [snd (head xs)] ++ notas n (tail xs)
-    | otherwise = notas n (tail xs)
-
-promedioDe :: [(Integer,Float)] -> Integer -> Float
-promedioDe [] _ = 0
-promedioDe xs n = promedio (notas n xs)
-
---
-
---esCapicua :: Integer -> Bool
---esCapicua a = nesimo a 1 == ultimoDigito
-
-ultimoDigito :: Integer -> Integer
-ultimoDigito num
-    | (num < 0) = ((-1) * num) `rem` 10
-    | otherwise = num `rem` 10
-
-dropLastDigit :: Integer -> Integer
-dropLastDigit n = div n 10
-
-cantDigitos :: Integer -> Integer
-cantDigitos n
-    | n < 10 = 1
-    | otherwise = 1 + cantDigitos (div n 10)
-
-toList :: Integer -> [Integer]
-toList a |
+esCapicua :: Integer -> Bool
+esCapicua a = esCapicuaAux (digs a)
