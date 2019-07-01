@@ -113,7 +113,7 @@ esSumaDeDosPrimos :: Integer -> Bool
 esSumaDeDosPrimos 1 = False
 esSumaDeDosPrimos n = checkPrimos (n-1) 1
 
--- 2 -- todo numero par > 2 es suma de dos primos
+-- cualquier num mayor a 2 es suma de 2 primos
 -- checkea si todos los p pares hasta n son suma de dos primos
 pruebaGoldHasta :: Integer -> Bool
 pruebaGoldHasta 3 = False   -- solo por si ingresan un impar o 3

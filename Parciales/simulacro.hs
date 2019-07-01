@@ -92,6 +92,8 @@ tuplar (x:xs) = (x,1) : tuplar xs
 --comprimir :: [Integer] -> [(Integer,Integer)]
 --comprimir xs = comprimirAux(tuplar xs)
 
+--
+
 l1 = [2,2,2,2,2,3]
 l2 = [2,3,4,5,6,7,2,3,4,5]
 l3 = [2,3,4,5]
@@ -129,6 +131,8 @@ sacarTodas xs [] = xs
 sacarTodas [] _ = []
 sacarTodas xs ys = sacarTodas (quitar (head ys) xs) (tail ys)
 
+--
+
 promedio :: [Float] -> Float
 promedio [] = 0
 promedio [x] = x
@@ -144,3 +148,24 @@ notas n xs
 promedioDe :: [(Integer,Float)] -> Integer -> Float
 promedioDe [] _ = 0
 promedioDe xs n = promedio (notas n xs)
+
+--
+
+--esCapicua :: Integer -> Bool
+--esCapicua a = nesimo a 1 == ultimoDigito
+
+ultimoDigito :: Integer -> Integer
+ultimoDigito num
+    | (num < 0) = ((-1) * num) `rem` 10
+    | otherwise = num `rem` 10
+
+dropLastDigit :: Integer -> Integer
+dropLastDigit n = div n 10
+
+cantDigitos :: Integer -> Integer
+cantDigitos n
+    | n < 10 = 1
+    | otherwise = 1 + cantDigitos (div n 10)
+
+toList :: Integer -> [Integer]
+toList a |
