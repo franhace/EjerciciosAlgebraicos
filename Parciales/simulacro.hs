@@ -107,3 +107,34 @@ esCapicuaAux (xs)
 
 esCapicua :: Integer -> Bool
 esCapicua a = esCapicuaAux (digs a)
+
+esCapi :: Integer -> Bool
+esCapi x = (div x 1000 == mod x 10) && (div w 10 == mod w 10)
+        where w = rem x 1000 `quot` 10
+
+suce :: Integer -> Integer
+suce 1 = 1
+suce 2 = 2
+suce 3 = 5
+suce n = 3*(suce (n-1))^2 + 2*(suce(n-2)) + suce (n-3)
+
+listarSuce :: Integer -> [Integer]
+listarSuce n = [suce n] ++ listarSuce (suce (n+1))
+
+esTerminoDeSuc :: Integer -> Integer -> Bool
+esTerminoDeSuc n m
+    | (suce m) == n = True
+    | (suce m ) > n = False
+    | (suce m) < n = esTerminoDeSuc n (m+1)
+
+listaConTerminosSuc :: [Integer] -> [Integer]
+listaConTerminosSuc [] = []
+listaConTerminosSuc (x:xs)
+    | (esTerminoDeSuc x 1 == True) = x : listaConTerminosSuc xs
+    | otherwise = listaConTerminosSuc xs
+
+sumaTerminos :: [Integer] -> Float
+sumaTerminos [] = 0
+sumaTerminos (x:xs) = fromInteger x + sumaTerminos xs
+
+ll = [5,23489,5432,1,19212,345]
