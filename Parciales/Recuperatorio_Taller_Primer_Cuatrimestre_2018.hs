@@ -20,20 +20,34 @@ composicion n | n == 1 = 0
               | otherwise = composicion (sucesion n) + 1
 
 -- Ej 4
+
+-- Dice si un numero es el cuadrado del otro
 esCuadrado :: Integer -> Integer -> Bool
 esCuadrado n m | n == m^2 = True
                 | otherwise = False
 
--- kesimo
-kesimo :: [Integer] -> Integer -> Integer
-kesimo xs k | k == 1 = head xs
-            | otherwise = kesimo (tail xs) (k-1)
+-- Funcion que toma 2 listas, y compara por posiciones si una es el cuadrado de la otra
+lugarCuadradoAux :: [Integer] -> [Integer] -> [Integer]
+lugarCuadradoAux _ [] = []
+lugarCuadradoAux [] _ = []
+lugarCuadradoAux [x] [j]
+    | esCuadrado x j = [x]
+    | otherwise = []
+lugarCuadradoAux (x:xs) (j:js)
+    | esCuadrado x j == True = x : lugarCuadradoAux (xs) (js)
+    | otherwise = lugarCuadradoAux (xs) (js)
 
+
+-- Da una lista con indices, teniendo en cuenta largo de la lista
+listaIndices :: [Integer] -> [Integer]
+listaIndices [] = []
+listaIndices [x] = [1]
+listaIndices xs = [1..x]
+            where x = toInteger (length xs)
+
+-- Devuelve la cantidad de elementos de una lista que sean iguales al cuadrado de su posicion
 lugarCuadrado :: [Integer] -> Integer
+lugarCuadrado [] = 0
+lugarCuadrado (xs) = toInteger (length(lugarCuadradoAux xs (listaIndices xs)))
 
-lugarCuadrado xs
-    | length xs < 1 = 0
-    | length xs == 1 =
-    | esCuadrado (kesimo xs (indice+1)) (indice+1) == True = 1 + lugarCuadrado (tail xs)
-    | otherwise = lugarCuadrado (tail xs)
-        where indice = 0
+-- Ej 5

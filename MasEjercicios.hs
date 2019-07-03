@@ -1,21 +1,21 @@
 milista = [2,3,1,12,1,2,1,21]
 
--- ultimo
+-- ultimo elemento de una lista
 elUltimo :: [Integer] -> Integer
 elUltimo [x] = x
 elUltimo (x:xs) = elUltimo xs
 
--- anteultimo
+-- anteultimo elemento de una lista
 anteultimo :: [Integer] -> Integer
 anteultimo [x, j] = x
 anteultimo (x:xs) = anteultimo xs
 
--- kesimo
+-- kesimo elemento de una lista
 kesimo :: [Integer] -> Integer -> Integer
 kesimo xs k | k == 1 = head xs
             | otherwise = kesimo (tail xs) (k-1)
 
--- numero elementos
+-- Cantidad de elementos de una lista
 numElem :: [Integer] -> Integer
 numElem [] = 0
 numElem [x] = 1
@@ -36,6 +36,13 @@ palindromo [x] = True
 palindromo [x,j] = x == j
 palindromo xs | (head xs) /= (elUltimo xs) = False
               | otherwise = palindromo (init(tail xs))
+
+-- Da una lista con indices, teniendo en cuenta largo de la lista
+listaIndices :: [Integer] -> [Integer]
+listaIndices [] = []
+listaIndices [x] = [1]
+listaIndices xs = [1..x]
+            where x = toInteger (length xs)
 
 -- busca ultimo digito de un numero
 ultimoDigito :: Integer -> Integer
