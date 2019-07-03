@@ -15,6 +15,10 @@ esCapicuaAux (xs)
 esCapicua :: Integer -> Bool
 esCapicua a = esCapicuaAux (digs a)
 
+
+-- Ej 4
+
+
 -- Ej 5
 
 suce :: Integer -> Integer

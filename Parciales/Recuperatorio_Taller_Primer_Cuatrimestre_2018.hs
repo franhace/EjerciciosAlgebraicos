@@ -51,3 +51,43 @@ lugarCuadrado [] = 0
 lugarCuadrado (xs) = toInteger (length(lugarCuadradoAux xs (listaIndices xs)))
 
 -- Ej 5
+-- Devuelve una lista, con todos los elementos igual al elemento
+apariciones :: Integer -> [Integer] -> [Integer]
+apariciones _ [] = []
+apariciones n (x:xs)
+    | n == x = x:(apariciones n xs)
+    | otherwise = (apariciones n xs)
+
+-- Devuelve la cantidad de apariciones de un elemento en una lista
+cantidadDeApariciones :: Integer -> [Integer] -> Integer
+cantidadDeApariciones _ [] = 0
+cantidadDeApariciones n (x:xs) = toInteger(length (apariciones n (x:xs)))
+
+-- tupla 2 elementos disjuntos
+tuplar :: Integer -> Integer -> (Integer,Integer)
+tuplar a b = (a,b)
+
+l = [2,2,2,5,5]
+
+-- Elimina todas las apariciones de un elemento
+quitarTodas :: Integer -> [Integer] -> [Integer]
+quitarTodas _ [] = []
+quitarTodas n (x:xs)
+    | n /= x = x:(quitarTodas n xs)
+    | otherwise = quitarTodas n xs
+
+-- Tupla (elemento de la lista, cantidad de apariciones)
+tuplador :: [Integer] -> [(Integer, Integer)]
+tuplador [] = []
+tuplador [x] = [(x,1)]
+tuplador (xs) = (head xs, (cantidadDeApariciones (head xs) xs )) : tuplador (quitarTodas (head xs) (tail xs))
+
+-- Las 5 funciones anteriores se pueden resumir en comprimir (funcion del simulacro)..
+-- Pero me gusta mi funcioncita
+
+
+l2 = [[5,7,8], [], [5,8,4], [5]]
+
+flat::[[a]] -> [a]
+flat [] = []
+flat (l:ls) = l ++ (flat ls)

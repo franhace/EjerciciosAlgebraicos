@@ -1,5 +1,9 @@
 milista = [2,3,1,12,1,2,1,21]
 
+flat::[[a]] -> [a]
+flat [] = []
+flat (l:ls) = l ++ (flat ls)
+
 -- ultimo elemento de una lista
 elUltimo :: [Integer] -> Integer
 elUltimo [x] = x
@@ -137,3 +141,10 @@ goodDeleteN i (a:as)
 incluido :: Set Usuario -> Set Usuario -> Bool
 incluido [] _ = True
 incluido (a:as) bs = perteneceUsuario a bs && incluido as bs
+
+-- Dado un usuario a y un conjunto de usuarios indica si a perteneceUsuario al conjunto.
+perteneceUsuario :: Usuario -> Set Usuario -> Bool
+perteneceUsuario _ [] = False
+perteneceUsuario a (u:us)
+    | idDeUsuario a == idDeUsuario u = True
+    | otherwise = perteneceUsuario a us

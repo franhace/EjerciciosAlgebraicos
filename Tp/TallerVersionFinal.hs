@@ -67,7 +67,7 @@ usuarioConMasAmigos (a:b:us, rs, ps)
 
 -- Dada una red social retorna True si algún usuario tiene más de un millón de amigos
 estaRobertoCarlos :: RedSocial -> Bool
-estaRobertoCarlos (us, rs, ps) = cantidadDeAmigos (us, rs, ps) (usuarioConMasAmigos (us, rs, ps)) >= 1000000
+estaRobertoCarlos (us, rs, ps) = cantidadDeAmigos (us, rs, ps) (usuarioConMasAmigos (us, rs, ps)) > 1000000
 -- corregir que tenia que ser mayor a 1 millon
 
 -- Dada una red social y un usuario retorna el conjunto de publicaciones del mismo.
