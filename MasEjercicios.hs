@@ -1,5 +1,8 @@
 milista = [2,3,1,12,1,2,1,21]
 
+
+-- Hace plana una lista de listas
+-- Es decir [[2,3],[4,5]] -> [2,3,4,5]
 flat::[[a]] -> [a]
 flat [] = []
 flat (l:ls) = l ++ (flat ls)

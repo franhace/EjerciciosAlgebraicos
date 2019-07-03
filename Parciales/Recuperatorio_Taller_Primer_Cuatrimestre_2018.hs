@@ -85,9 +85,22 @@ tuplador (xs) = (head xs, (cantidadDeApariciones (head xs) xs )) : tuplador (qui
 -- Las 5 funciones anteriores se pueden resumir en comprimir (funcion del simulacro)..
 -- Pero me gusta mi funcioncita
 
-
 l2 = [[5,7,8], [], [5,8,4], [5]]
 
 flat::[[a]] -> [a]
 flat [] = []
 flat (l:ls) = l ++ (flat ls)
+
+-- Solo guarda elementos cuya cantidad de apariciones sea impar, en una lista
+comprimirAux :: [(Integer, Integer)] -> [Set Integer]
+comprimirAux [] = []
+comprimirAux [(a,b)]
+    | mod b 2 /= 0 = [a]
+    | otherwise = []
+comprimirAux ((a,b):xs)
+  | (mod b 2 == 0) = comprimirAux xs
+  | otherwise = a : comprimirAux xs
+
+-- Este deberia ser el dif sim
+--altoCompresor :: [Set Integer] -> Set Integer
+--altoCompresor [xs] = comprimirAux (tuplador (flat xs))
