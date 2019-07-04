@@ -31,3 +31,6 @@ cantCambiosParidad [x,j]
 cantCambiosParidad (x:j:xs)
     | cambioParidad x j == True = 1 + cantCambiosParidad (j:xs)
     | otherwise = cantCambiosParidad (j:xs)
+
+-- EJ 4
+cantComunes :: [Integer] -> [Integer] -> Integer
